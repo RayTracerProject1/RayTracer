@@ -3,7 +3,7 @@
 
 //Program to compile - Or the raytracer itself.
 #include "main.c"
-//Leo er best
+//Leo
 #include "dataStructure.h"
 //Jonas
 #include "sphere.c"
