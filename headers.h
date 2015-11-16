@@ -1,4 +1,4 @@
-//Dette er navnet paa biblioteket i alle skal adde
+//Dette er navnet paa biblioteket i alle skal adde //Hej seje
 #include "headers.h"
 
 //Program to compile - Or the raytracer itself.
