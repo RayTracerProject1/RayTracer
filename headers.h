@@ -10,8 +10,7 @@
 #include "sphere.h"
 
 //Ray Tracer addons
-#include "vectors.c"
-#include "vectors.h"
+#include "vector.h"
 //Leo Shading
 #include "shading.c"
 #include "shading.h"
