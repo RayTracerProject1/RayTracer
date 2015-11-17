@@ -1,9 +1,11 @@
+#include "headers.h"
+
 typedef struct vector1
 {
     float x;
     float y;
     float z;
-}vec1;
+}vector1;
 
 typedef struct vector2
 {
@@ -11,9 +13,10 @@ typedef struct vector2
     float y;
     float z;
     float a;
-}vec2;
+}vector2;
 
-#include "headers.h"
+
+        /* Vector1 calculations start: */
 
 //vector addition product
 vector1 vectorAddition(vector1 *v1, vector1 *v2)
@@ -53,3 +56,4 @@ vector1 vectorCrossProduct(vector1 *v1, vector1 *v2)
 
 	return result;
 }
+        /* Vector1 calculations end*/
