@@ -5,7 +5,7 @@
 #include "sphere.h" //Jonas
 
 //Ray Tracer addons
-#include "vector.h"
+#include "vector.h" //Jonas
 #include "shading.h" //Leo Shading
 #include "fogging.h"
 #include "reflection.h"
