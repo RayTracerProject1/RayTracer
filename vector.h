@@ -1,4 +1,20 @@
 //vector addition product
+
+typedef struct vec1
+{
+    float x;
+    float y;
+    float z;
+}vec1;
+
+typedef struct vec2
+{
+    float x;
+    float y;
+    float z;
+    float a;
+}vec2;
+
 vector vectorAddition(vector *v1, vector *v2)
 {
         vector result = {v1 -> x + v2 -> x, v1 -> y + v2 -> y, v1 -> z + v2 -> z };
