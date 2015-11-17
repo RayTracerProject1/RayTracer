@@ -5,7 +5,10 @@
 	double x;
 	double y;
 	double z;
-} vector; */
+} vector; 
+* Also might want the structures for each ting in it's own header file,
+* so the struct for color will be in the color.h
+*/
 
 //test
 #define WOOD 0
@@ -26,12 +29,6 @@ typedef struct {
 	vector1 pos; // Starting position of ray
 	vector1 dir; // Direction of the ray from the starting position
 } ray;
-
-typdef stuct {
-	double red;
-	double green;
-	double blue;
-} color;
 
 typedef struct {
 	vector1 pos;
