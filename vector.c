@@ -19,7 +19,8 @@ vector1 vectorSubtract(vector1 *vec1, vector1 *vec2)
 //vector dot product
 vector1 vectorDotProduct(vector1 *vec1, vector1 *vec2)
 {
-        return vec1 -> x * vec2 -> x + vec1 -> y * vec2 -> y + vec1 -> z * vec2 -> z;
+        vector1 result = {x * vec2 -> x + vec1 -> y * vec2 -> y + vec1 -> z * vec2 -> z}:
+        return result;
 }
 
 //vector scalar product
