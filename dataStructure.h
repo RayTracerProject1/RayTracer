@@ -23,6 +23,11 @@ typedef struct material
     int materialType;
 }material;
 
+typedef struct FOV
+{
+    double FOV;
+}FOV;
+
 typedef struct {
 	vector1 pos; // Starting position of ray
 	vector1 dir; // Direction of the ray from the starting position

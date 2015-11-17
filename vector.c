@@ -3,23 +3,23 @@
         /* Vector1 calculations start: */
 
 //vector addition product
-vector1 vectorAddition(vector1 *vec1, vector1 *vec2)
+vector1 vectorAddition(vector1 *v1, vector1 *v2)
 {
-        vector1 result = {vec1 -> x + vec2 -> x, vec1 -> y + vec2 -> y, vec1 -> z + vec2 -> z };
+        vector1 result = {v1 -> x + v2 -> x, v1 -> y + v2 -> y, v1 -> z + v2 -> z };
         return result;
 }
 
 //vector subtract product
-vector1 vectorSubtract(vector1 *vec1, vector1 *vec2)
+vector1 vectorSubtract(vector1 *v1, vector1 *v2)
 {
-        vector1 result = {vec1 -> x - vec2 -> x, vec1 -> y - vec2 -> y, vec1 -> z - vec2 -> z };
+        vector1 result = {v1 -> x - v2 -> x, v1 -> y - v2 -> y, v1 -> z - v2 -> z };
         return result;
 }
 
 //vector dot product
-vector1 vectorDotProduct(vector1 *vec1, vector1 *vec2)
+vector1 vectorDotProduct(vector1 *v1, vector1 *v2)
 {
-        vector1 result = {x * vec2 -> x + vec1 -> y * vec2 -> y + vec1 -> z * vec2 -> z}:
+        vector1 result = {x * v2 -> x + v1 -> y * v2 -> y + v1 -> z * v2 -> z}:
         return result;
 }
 
@@ -31,13 +31,13 @@ vector1 vectorScalar(double a, vector1 *v)
 }
 
 //vector cross product
-vector1 vectorCrossProduct(vector1 *vec1, vector1 *vec2)
+vector1 vectorCrossProduct(vector1 *v1, vector1 *v2)
 {
 	vector1 result;
 
-	result.x = (vec1 -> y * vec2 -> z) - (vec1 -> z * vec2 -> y);
-	result.y = (vec1 -> z * vec2 -> x) - (vec1 -> x * vec2 -> z);
-	result.z = (vec1 -> x * vec2 -> y) - (vec1 -> y * vec2 -> x);
+	result.x = (v1 -> y * v2 -> z) - (v1 -> z * v2 -> y);
+	result.y = (v1 -> z * v2 -> x) - (v1 -> x * v2 -> z);
+	result.z = (v1 -> x * v2 -> y) - (v1 -> y * v2 -> x);
 
 	return result;
 }

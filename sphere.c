@@ -1,7 +1,7 @@
 #include "headers.h"
 #include <math.h>
 
-bool IntersectRayTracer(RayTracer * r, Sphere * s)
+bool intersectRayTracer(rayTracer *r, Sphere *s)
 {
     double A = VectorDotProduct(&r -> direction, &r -> direction);
 
@@ -9,7 +9,7 @@ bool IntersectRayTracer(RayTracer * r, Sphere * s)
 
     double B = 2 * VectorDotProduct(&r -> direction, &Distance);
 
-    double C = VectorDotProduct(&Distance, &Distance) - (s -> radius * s -> radius);
+    double C = VectorDotProduct(&Distance, &Distance) - (s -> radius *s -> radius);
 
     //Or pow, easy way B*B = B^2
     double Discriminant = B * B - 4 * A * C;
