@@ -1,36 +1,20 @@
 #include "headers.h"
 #include <math.h>
 
-bool rayCollideWithSphere(ray *r, sphere *s, float *a)
+bool IntersectRayTracer(RayTracer * r, Sphere * s)
 {
-    //vector distance = start of the ray - sphere position
-    vector distance = vectorSubtract(%r -> start, %s -> position);
-    //A = ray direction
-    float A = vectorDotProduct(%distance, %r -> direction);
-    //discriminant A^2 - sphere radius
-    float discriminant = A * A - vectorDotProduct(%distance, %distance) + s -> size * s -> size;
+    float A = VectorDotProduct(&r -> direction, &r -> direction);
 
-    //No hit
-    if(discriminant < 0)
+    Vector Distance = VectorSubtract(&r -> start, &s -> position);
+
+    float B = 2 * VectorDotProduct(&r -> direction, &Distance);
+
+    float C = VectorDotProduct(&Distance, &Distance) - (s -> radius * s -> radius);
+
+    float Discriminant = B * B - 4 * A * C;//Or pow, easy way B*B = B^2
+
+    if(Discriminant < 0)
         return false;
-
-    float root0 = -b - sqrtf(discriminant);
-    float root1 = -b + sqrtf(discriminant):
-
-    bool returnValue = false;
-
-    //One of these should hit
-    if((root0 > 0) && (root0 < *a))
-    {
-        *a = root0;
-        returnValue = true;
-    }
-
-    if((root1 > 0) && (root1 < *a))
-    {
-        *a = root1;
-        returnValue = true;
-    }
-
-    return returnValue;
+    else
+        return true;
 }
