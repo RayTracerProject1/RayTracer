@@ -19,3 +19,5 @@ bool IntersectRayTracer(RayTracer * r, Sphere * s)
     else
         return true;
 }
+
+
