@@ -1,14 +1,15 @@
 #include "headers.h"
 
-typedef struct {
+//Brug vector headeren, den findes allerede -> vector.h
+/*typedef struct {
 	double x;
 	double y;
 	double z;
-} vector;
+} vector; */
 
 typedef struct {
-	vector pos; // Starting position of ray
-	vector dir; // Direction of the ray from the starting position
+	vector1 pos; // Starting position of ray
+	vector1 dir; // Direction of the ray from the starting position
 } ray;
 
 typdef stuct {
@@ -18,7 +19,7 @@ typdef stuct {
 } color;
 
 typedef struct {
-	vector pos;
+	vector1 pos;
 	color lightColor;
 	double intensity;
 } light;
