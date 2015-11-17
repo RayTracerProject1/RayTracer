@@ -1,6 +1,6 @@
 typedef struct sphere
 {
-    vector position;
+    vector1 position;
     float radius;
     //int material; //number of the material it has to choose or get.
 }sphere;
