@@ -24,7 +24,7 @@ vector1 vectorDotProduct(vector1 *vec1, vector1 *vec2)
 }
 
 //vector scalar product
-vector1 vectorScalar(float a, vector1 *v)
+vector1 vectorScalar(double a, vector1 *v)
 {
         vector1 result = {v -> x * c, v -> y * c, v -> z * c};
         return result;
