@@ -1,18 +1,3 @@
-typedef struct vector1
-{
-    float x;
-    float y;
-    float z;
-}vec1;
-
-typedef struct vector2
-{
-    float x;
-    float y;
-    float z;
-    float a;
-}vec2;
-
 #include "headers.h"
 
 //vector addition product
