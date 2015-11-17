@@ -7,6 +7,21 @@
 	double z;
 } vector; */
 
+//test
+#define WOOD 0
+#define BRONZE 1
+#define SILVER 2
+#define GOLD 3
+#define PLATINUM 4
+#define DIAMOND 5
+#define TITANIUM 6
+
+//test
+typedef struct material
+{
+    int materialType;
+}material;
+
 typedef struct {
 	vector1 pos; // Starting position of ray
 	vector1 dir; // Direction of the ray from the starting position
