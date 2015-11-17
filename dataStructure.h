@@ -2,10 +2,8 @@
 
 //Brug vector headeren, den findes allerede -> vector.h
 /*typedef struct {
-	double x;
-	double y;
-	double z;
-} vector; 
+	double x, y, z;
+} vector;
 * Also might want the structures for each ting in it's own header file,
 * so the struct for color will be in the color.h
 */

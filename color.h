@@ -1,12 +1,9 @@
-
-
 typedef struct {
-	double red;
-	double green;
-	double blue;
+    //Samme element
+	double red, green, blue;
 } color;
 
 // function prototype
 
 // multiply color with coefficient
-color colorCoeMul(double coef, color *c); 
+color colorCoeMul(double coef, color *c);
