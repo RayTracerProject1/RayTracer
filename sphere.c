@@ -1,7 +1,7 @@
 #include "headers.h"
 #include <math.h>
 
-bool intersectRayTracer(rayTracer *r, Sphere *s)
+bool intersectRayTracer(rayTracer *r, sphere *s)
 {
     double A = VectorDotProduct(&r -> direction, &r -> direction);
 
