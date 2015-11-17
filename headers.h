@@ -3,6 +3,7 @@
 
 #include "dataStructure.h" //Leo
 #include "sphere.h" //Jonas
+#include "color.h"
 
 //Ray Tracer addons
 #include "vector.h" //Jonas
