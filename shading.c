@@ -19,3 +19,5 @@
 
  	return shadeCoef;
  }
+
+ // Might be able to upgrade the function to include reflections

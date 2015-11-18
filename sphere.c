@@ -19,7 +19,7 @@ bool intersectRayTracer(rayTracer *r, sphere *s)
     else
         return true;
 }
-
+// function to find position of the intersection point
 vector hitPointPos(rayTracer *r, sphere *s)
 {
     double A = VectorDotProduct(&r -> direction, &r -> direction);
