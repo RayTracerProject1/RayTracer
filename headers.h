@@ -1,9 +1,7 @@
-//Dette er navnet paa biblioteket i alle skal adde //Hej seje
-#include "headers.h"
-
 #include "dataStructure.h" //Not really needed but might want to keep around as reference list
 #include "sphere.h" //Jonas
 #include "color.h"
+#include "camera.h"
 
 //Ray Tracer addons
 #include "vector.h" //Jonas
