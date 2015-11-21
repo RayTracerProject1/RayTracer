@@ -1,14 +1,14 @@
 
 // function prototype
 
-double shadeCoef(vector1 spherePos, vector1 hitPos, vector1 lightPos);
+double shadeCoef(Vector spherePos, Vector hitPos, Vector lightPos);
 
 /*
 example use:
 
 colorCoeMul(shadeCoef(spherePos, hitPos, lightPos), color)
 
-or 
+or
 
 colorCoeMul(shadeCoef(spherePos, hitPointPos(ray, sphere), lightPos), color)
 
