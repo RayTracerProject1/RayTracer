@@ -19,6 +19,7 @@ bool intersectRayTracer(rayTracer *r, sphere *s)
     else
         return true;
 }
+
 // function to find position of the intersection point
 vector hitPointPos(rayTracer *r, sphere *s)
 {
@@ -60,7 +61,6 @@ vector hitPointPos(rayTracer *r, sphere *s)
     if(distToHit < 0)
         distToHit = root2;
 
-<<<<<<< HEAD
 // function to find position of the intersection point
 vector hitPointPos(rayTracer *r, sphere *s)
 {
@@ -106,10 +106,7 @@ vector hitPointPos(rayTracer *r, sphere *s)
 
     return hitPos;
 }
-
-=======
     vector hitPos = &r->start + (&r->direction * distToHit);
->>>>>>> origin/master
 
     return hitPos;
 }
