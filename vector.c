@@ -64,7 +64,7 @@ static double invSqrt1(double y)
 Vector vecUnit(Vector v)
 {
     double is = invSqrt1(SQUARE(v.x) + SQUARE(v.y) + SQUARE(v.z));
-    return vecMultiply()ult(v, is);
+    return vecMultiply(v, is);
 }
 
 Vector vecCrossProduct(Vector a, Vector b)
