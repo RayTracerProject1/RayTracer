@@ -1,23 +1,32 @@
 #include "headers.h"
 #include <math.h>
 
-bool intersectRayTracer(rayTracer *r, sphere *s)
+bool collideWithSphere(rayTracer *r, sphere *s, double *t)
 {
-    double A = vecDotProduct(&r -> direction, &r -> direction);
+    Vector dist = vecSubtract(&r->start, &s->pos);
+    double B = vecDotProduct(&dist, &r->dir);
+    double D = pow(B, 2) - vecDotProduct(&dist, &dist) + s->size * s->size;
 
-    Vector Distance = vecSubtract(&r -> start, &s -> position);
-
-    double B = 2 * vecDotProduct(&r -> direction, &Distance);
-
-    double C = vecDotProduct(&Distance, &Distance) - (s -> radius *s -> radius);
-
-    //Or pow, easy way B*B = B^2
-    double Discriminant = B * B - 4 * A * C;
-
-    if(Discriminant < 0)
+    if(D < 0)
         return false;
-    else
-        return true;
+
+    double root1 = -B - sqrtf(D);
+    double root2 = -B +sqrtf(D);
+
+    bool returnValue = false;
+
+    if((root1 > 0) && (root1 < *t))
+    {
+        *t = root1;
+        returnValue = true;
+    }
+    if((root2 > 0) && (root2 < *t))
+    {
+        *t = root2;
+        returnValue = true;
+    }
+
+    return returnValue;
 }
 
 // function to find position of the intersection point
