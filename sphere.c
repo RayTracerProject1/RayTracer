@@ -1,7 +1,7 @@
-#include "headers.h"
+be#include "headers.h"
 #include <math.h>
 
-bool collideWithSphere(rayTracer *r, sphere *s, double *t)
+bool collideWithSphere(rayTracer *r, sphere *s, double *root)
 {
     Vector dist = vecSubtract(&r->start, &s->pos);
     double B = vecDotProduct(&dist, &r->dir);
