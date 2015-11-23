@@ -10,8 +10,8 @@ bool collideWithSphere(rayTracer *r, sphere *s, double *t)
     if(D < 0)
         return false;
 
-    double root1 = -B - sqrtf(D);
-    double root2 = -B +sqrtf(D);
+    double root1 = -B - sqrt(D);
+    double root2 = -B + sqrt(D);
 
     bool returnValue = false;
 
