@@ -17,12 +17,12 @@ bool collideWithSphere(rayTracer *r, sphere *s, double *root)
 
     if((root1 > 0) && (root1 < *t))
     {
-        *t = root1;
+        *root = root1;
         returnValue = true;
     }
     if((root2 > 0) && (root2 < *t))
     {
-        *t = root2;
+        *root = root2;
         returnValue = true;
     }
 
