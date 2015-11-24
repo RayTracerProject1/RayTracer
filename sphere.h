@@ -5,6 +5,6 @@ typedef struct sphere
     //int material; //number of the material it has to choose or get.
 }sphere;
 
-bool intersectRayTracer(rayTracer *r, sphere *s);
+bool collideWithSphere(rayTracer *r, sphere *s, double *root);
 
 Vector hitPointPos(rayTracer *r, sphere *s);
