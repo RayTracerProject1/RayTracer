@@ -1,3 +1,9 @@
+/*
+* Defines what the camera needs for it to work correctly.
+* Makes a function for the camera init and setup.
+* Look at camera.c
+*/
+
 #include "headers.h"
 
 typedef struct camera

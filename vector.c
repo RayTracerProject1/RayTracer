@@ -1,5 +1,6 @@
 #include "headers.h"
 
+//Do the calulations + returnt he value.
 Vector vecMake(double x, double y, double z)
 {
     Vector v;

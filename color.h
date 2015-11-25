@@ -1,5 +1,5 @@
 typedef struct {
-    //Samme element
+    //Same element
 	double red, green, blue;
 } color;
 

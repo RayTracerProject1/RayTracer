@@ -1,4 +1,10 @@
-be#include "headers.h"
+/*
+* Here we make our functions to our sphere
+* We also define our hitPointPos.
+* We do also find/define the closest target/object we can find in the image.
+*/
+
+#include "headers.h"
 #include <math.h>
 
 bool collideWithSphere(rayTracer *r, sphere *s, double *root)
@@ -15,12 +21,12 @@ bool collideWithSphere(rayTracer *r, sphere *s, double *root)
 
     bool returnValue = false;
 
-    if((root1 > 0) && (root1 < *t))
+    if((root1 > 0.1) && (root1 < *root))
     {
         *root = root1;
         returnValue = true;
     }
-    if((root2 > 0) && (root2 < *t))
+    if((root2 > 0.1) && (root2 < *root))
     {
         *root = root2;
         returnValue = true;
@@ -67,7 +73,8 @@ vector hitPointPos(rayTracer *r, sphere *s)
 
     // distance from ray start to hit position
     double distToHit = root1;
-    if(distToHit < 0)
+
+    if(distToHit < 0.0)
         distToHit = root2;
 
     Vector hitPos = &r->start + (&r->direction * distToHit);

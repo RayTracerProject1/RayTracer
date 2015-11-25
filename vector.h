@@ -1,5 +1,5 @@
-//Define zero point of the vector.
-#define VECTOR_ZERO vec_make(0.0, 0.0, 0.0)
+//Define zero point of the vector. as 0, 0, 0 in our axis.
+#define VECTOR_ZERO vecMake(0.0, 0.0, 0.0)
 
 //Define addition calculation           This for seperation
 #define VECTOR_ADDITION1(out, a, b)          \
@@ -34,7 +34,7 @@
                 (out).y = (a).y * b;    \
                 (out).z = (a).z * b
 
-//Define multiply calculation             this for seperation
+//Define multiply calculation             This for seperation
 #define VECTOR_MULTIPLY2(out, a, b)          \
                 (out).x = (a).x * (b).x;     \
                 (out).y = (a).y * (b).y;     \
