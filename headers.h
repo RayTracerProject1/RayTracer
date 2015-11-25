@@ -1,4 +1,4 @@
-#include "dataStructure.h" //Not really needed but might want to keep around as reference list
+#include "dataStructure.h" //This is needed
 #include "sphere.h" //Jonas
 #include "color.h"
 #include "camera.h"
