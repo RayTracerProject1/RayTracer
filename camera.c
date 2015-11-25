@@ -1,3 +1,9 @@
+/*
+* Heres where the magic happens.
+* We define thee camerainit, to the informations it needs.
+* After that we define our cameraSetup function.
+*/
+
 #include <stdio.h>
 #include "headers.h"
 
