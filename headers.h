@@ -1,7 +1,10 @@
 #include "dataStructure.h" //This is needed
 #include "sphere.h" //Jonas
+#include "triangle.h"
 #include "color.h"
 #include "camera.h"
+#include "scene.h"
+
 
 //Ray Tracer addons
 #include "vector.h" //Jonas

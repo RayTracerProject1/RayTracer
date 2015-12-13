@@ -1,5 +1,20 @@
 #include "headers.h"
 
+#define max(a, b) (((a) > (b)) ? (a) : (b))
+
+#define GOURAUD 0
+#define MARBLE 1
+#define TURBULENCE 2
+
+typedef struct material {
+	int MatType;
+	color diffuse;
+	color mdiffuse;
+	double bump, reflection;
+	color specular;
+	double power;
+} material;
+
 typedef struct {
 	Vector start; // Starting position of ray
 	Vector dir; // Direction of the ray from the starting position
