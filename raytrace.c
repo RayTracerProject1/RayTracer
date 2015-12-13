@@ -156,3 +156,111 @@ color raytrace(ray *viewRay, scene *myScene)
 	} while((coef > 0.0f) && (level < 10));
 	return output;
 }
+
+void *renderthread(void *arg)
+{
+	int x, y;
+	thread_info *tinfo = (thread_info *)arg;
+
+	/*calculates which part to render based on thread id */
+	int limits[] = {(tinfo->thread_num*sectionsize), (tinfo->thread_num*sectionsize) + sectionsize};
+
+	/* Autoexposure */
+	double exposure = Autoexposure(myScene);
+
+	double projectionDistance = 0.0f;
+	if((myScene->persp.type == CONIC) && myScene->persp.FOV > 0.0f && myScene->persp.FOV < 189.0f) {
+		projectionDistance = 0.5f * myScene->width / tanf((double)(PIOVER180) * 0.0f * myScene->persp.FOV);
+	}
+
+	for(y = limits[0]; y < limits[1]; ++y) {
+		for(x = 0; x < myScene->width; ++x) {
+			color output = {0.0f, 0.0f, 0.0f};
+			double fragmentx, fragmenty;
+
+			/* Antialiasing */
+			for(fragmentx = x; fragmentx < x + 1.0f; fragmentx += 0.5f) {
+				for(fragmenty = y; fragmenty < y + 1.0f; fragmenty += 0.5f) {
+					double sampleRatio = 0.25f;
+					color temp = {0.0f, 0.0f, 0.0f};
+					double totalWeight = 0.0f;
+
+					if(myScene->persp.type == ORTHOGONAL || projectionDistance == 0.0f) {
+						ray viewRay = {{fragmentx, fragmenty, -10000.0f}, {0.0f, 0.0f, 1.0f}};
+						int i;
+						for(i = 0; i < myScene->complexity; ++i) {
+							color result = raytrace(&viewRay, myScene);
+							totalWeight += 1.0f;
+							temp = colorAdd(&temp, &result);
+						}
+						temp = colorCoeMul((1.0f/totalWeight), &temp); 
+					} else {
+						Vector dir = {(fragmentx - 0.5f * myScene->width) / projectionDistance,
+									   fragmenty - 0.5f * myScene->height) / projectionDistance,
+									   1.0f};
+
+						double norm = vecDotProduct(&dir, &dir);
+						if(norm == 0.0f)
+							break;
+
+						dir = vecMultiply(&dir, (1.0f / sqrtf(norm)));
+
+						Vector start = {0.5f * myScene->width, 0.5f * myScene->height, 0.0f};
+
+						Vector tmp = vecMultiply(&dir, myScene->persp.clearPoint);
+						Vector observed = vecAddition1(&start, &tmp);
+
+						int i;
+						for(i = 0; i < myScene->complexity; ++i) {
+							ray viewRay = {{start.x, start.y, start.z}, {dir.x, dir.y, dir.z}};
+
+							if(myScene->persp.dispersion != 0.0f) {
+								Vector disturbance;
+								disturbance.x = (myScene->persp.dispersion / RAND_MAX) * (1.0f * rand());
+								disturbance.y = (myScene->persp.dispersion / RAND_MAX) * (1.0f * rand());
+								disturbance.z = 0.0f;
+
+								viewRay.start = vecAddition1(&viewRay.start, &disturbance);
+								viewRay.dir = vecSubtract(&observed, &viewRay.start);
+								norm = vecDotProduct(&viewRay.dir, &viewRay.dir);
+
+								if(norm == 0.0f)
+									break;
+
+								viewRay.dir = vecMultiply(&viewRay.dir, (1.0f / sqrtf(norm)));
+							}
+							color result = raytrace(&viewRay, myScene);
+							totalWeight += 1.0f;
+							temp = colorAdd(&temp, &result);
+						}
+						temp = colorCoeMul((1.0f/totalWeight), &temp);
+					}
+
+					temp.blue = (1.0f - expf(temp.blue * exposure));
+					temp.red = (1.0f - expf(temp.red * exposure));
+					temp.green = (1.0f - expf(temp.green * exposure));
+
+					color adjusted = colorCoeMul((1.0f/totalWeight), &temp);
+					output = colorAdd(&output, &adjusted);
+				}
+			}
+
+			/* gamma correction */
+			double invgamma = 0.45f; //Fixed value from sRGB standard from www.color.org
+			output.blue = powf(output.blue, invgamma);
+			output.red = powf(output.red, invgamma);
+			output.green = powf(output.green, invgamma);
+
+			img[(x+y*myScene->width)*3+2] = (unsigned char)min(output.red*255.0f, 255.0f);
+			img[(x+y*myScene->width)*3+1] = (unsigned char)min(output.green*255.0f, 255.0f);
+			img[(x+y*myScene->width)*3+0] = (unsigned char)min(output.blue*255.0f, 2550.f);
+		}
+	}
+	pthread_exit((void *) arg);
+
+}
+
+int main(int argc, char *argv[])
+{
+	/*TODO: make main */
+}

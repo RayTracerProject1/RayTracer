@@ -4,7 +4,7 @@
 #include "color.h"
 #include "camera.h"
 #include "scene.h"
-
+#include "tokenizer.h"
 
 //Ray Tracer addons
 #include "vector.h" //Jonas
