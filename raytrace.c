@@ -262,5 +262,128 @@ void *renderthread(void *arg)
 
 int main(int argc, char *argv[])
 {
-	/*TODO: make main */
+	/* Scene */
+	scene mine;
+	mine.materials = NULL;
+	mine.spheres = NULL;
+	mine.triangles = NULL;
+	mine.lights = NULL;
+	myScene = &mine;
+
+	/* TODO: noise for scene */
+
+	/* Threads */
+	thread_info *tinfo;
+	pthread_attr_t attr;
+	int t;
+
+	/* Allocate memory for pthread_create() arguments */
+	tinfo = calloc(NUMTHREADS, sizeof(thread_info));
+	if(tinfo  == NULL) {
+		printf("Error allocating memory for pthread_create() arguments. \n");
+		return -1;
+	}
+
+	if(argc < 2) {
+		printf("specify scene file. \n");
+		return -1;
+	}
+
+	/* build the scene */
+	if(tokenizer(argv[1], myScene) == -1) {
+		exit(-1);
+	}
+
+	/* 3ds loader for object loading */
+	if(argc == 3) {
+
+		obj_type object;
+		Load3DS(&object, argv[2]); /* the 3ds file containing the object */
+		int index;
+
+		/*printf("Polygons: %d \n", object.polygons_qty);*/
+
+		myScene->triangles = (triangle *)realloc(myScene->triangles, object.polygons_qty*(sizeof(triangle)));
+		memset(myScene->triangles, 0, sizeof(triangle));
+
+		myScene->numTriangles = object.polygons_qty;
+		for(index = 0; index < object.polygons_qty; index++) {
+			/* first vertex */
+			myScene->triangles[index].v2.x = object.vertex[object.polygon[index].a].x + 130; /*TODO: check numbers if they control position of object */
+			myScene->triangles[index].v2.y = object.vertex[object.polygon[index].a].y + 150;
+			myScene->triangles[index].v2.z = object.vertex[object.polygon[index].a].z + 350;
+			myScene->triangles[index].v2 = vecMultiply(&myScene->triangles[index].v2, 2);
+			/* second vertex */
+			myScene->triangles[index].v1.x = object.vertex[object.polygon[index].b].x + 130;
+			myScene->triangles[index].v1.y = object.vertex[object.polygon[index].b].y + 150;
+			myScene->triangles[index].v1.z = object.vertex[object.polygon[index].b].z + 350;
+			myScene->triangles[index].v1 = vecMultiply(&myScene->triangles[index].v1, 2);
+			/* third vertex */
+			myScene->triangles[index].v3.x = object.vertex[object.polygon[index].c].x + 130;
+			myScene->triangles[index].v3.y = object.vertex[object.polygon[index].c].y + 150;
+			myScene->triangles[index].v3.z = object.vertex[object.polygon[index].c].z + 350;
+			myScene->triangles[index].v3 = vecMultiply(&myScene->triangles[index].v3, 2);
+
+			/* default material */
+			myScene->triangles[index].material = 3;
+
+		}
+	}
+
+	if(img)
+		free(img);
+	img = (unsigned char  *)malloc(3*myScene->width * myScene->height);
+	memset(img, 0, 3*myScene->width * myScene->height);
+
+	/* calculate section size per thread */
+	sectionsize = myScene->height/NUMTHREADS;
+	if((sectionsize % 2) != 0)
+		printf("Warning: Height/numthreads not even - there will be errors in the image!! \n");
+
+	/* Pthread options */
+	pthread_attr_init(&attr);
+	pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_JOINABLE);
+
+	/* Create the render threads */
+	for(t = 0; t < NUMTHREADS; t++) {
+		tinfo[t].thread_num = t;
+		if(pthread_create(&tinfo[t].thread_id, &attr, renderThread, &tinfo[t])) {
+			printf("Creation of thread %d failed. \n", t);
+			exit(-1);
+		}
+	}
+
+	if(pthread_attr_destroy(&attr)) {
+		printf("Error destroying thread attributes. \n");
+	}
+
+	/* wait for render threads to finish */
+	for(t = 0; t  < NUMTHREADS; t++) {
+		if(pthread_join(tinfo[t].thread_id, NULL)) {
+			printf("Error waiting for thread. \n");
+		}
+	}
+
+	/* Save the image */
+	savebmp("out.bmp", img, myScene);
+
+	/* free allocated memory */
+	if(img)
+		free(img);
+	if(myScene->lights)
+		free(myScene->lights);
+	if(myScene->triangles)
+		free(myScene->triangles);
+	if(myScene->spheres)
+		free(myScene->spheres);
+	if(myScene->materials)
+		free(myScene->materials);
+
+	/* exit */
+	pthread_exit(NULL);
+
+	if(tinfo)
+		free(tinfo);
+
+	return 0;
 }
