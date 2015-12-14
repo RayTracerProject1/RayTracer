@@ -16,19 +16,19 @@ bool collideWithSphere(rayTracer *r, sphere *s, double *root)
     if(D < 0)
         return false;
 
-    double root0 = -B - sqrt(D);
-    double root1 = -B + sqrt(D);
+    double root1 = -B - sqrt(D);
+    double root2 = -B + sqrt(D);
 
     bool returnValue = false;
 
-    if((root0 > 0.1) && (root0 < *root))
-    {
-        *root = root0;
-        returnValue = true;
-    }
     if((root1 > 0.1) && (root1 < *root))
     {
         *root = root1;
+        returnValue = true;
+    }
+    if((root2 > 0.1) && (root2 < *root))
+    {
+        *root = root2;
         returnValue = true;
     }
 
